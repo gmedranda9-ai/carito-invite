@@ -1,0 +1,1352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Bellavista · 21 Marzo</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Montserrat:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --sand: #F5E6C8;
+    --sand-dark: #E8D4A8;
+    --ocean: #1A5F7A;
+    --ocean-deep: #0D3D52;
+    --ocean-light: #4A9BBF;
+    --foam: #E8F4F8;
+    --coral: #E8845A;
+    --text-dark: #1A1A1A;
+    --text-mid: #4A4A4A;
+    --gold: #C9A84C;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Montserrat', sans-serif;
+    background: var(--ocean-deep);
+    color: var(--text-dark);
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom cursor */
+  .cursor {
+    position: fixed;
+    width: 10px; height: 10px;
+    background: var(--coral);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s;
+    transform: translate(-50%, -50%);
+  }
+  .cursor-ring {
+    position: fixed;
+    width: 36px; height: 36px;
+    border: 1.5px solid rgba(232,132,90,0.5);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.15s ease, width 0.2s, height 0.2s;
+    transform: translate(-50%, -50%);
+  }
+
+  /* ── COVER ── */
+  #cover {
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: linear-gradient(180deg, #0D2535 0%, #1A5F7A 55%, #2E8FA8 100%);
+  }
+
+  /* Animated sky stars */
+  .stars {
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(1px 1px at 10% 15%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 25% 8%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 40% 20%, rgba(255,255,255,0.7) 0%, transparent 100%),
+      radial-gradient(1px 1px at 60% 5%, rgba(255,255,255,0.5) 0%, transparent 100%),
+      radial-gradient(1px 1px at 75% 18%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1.5px 1.5px at 88% 10%, rgba(255,255,255,0.6) 0%, transparent 100%),
+      radial-gradient(1px 1px at 15% 35%, rgba(255,255,255,0.3) 0%, transparent 100%),
+      radial-gradient(1px 1px at 50% 28%, rgba(255,255,255,0.4) 0%, transparent 100%),
+      radial-gradient(1px 1px at 90% 30%, rgba(255,255,255,0.5) 0%, transparent 100%);
+    animation: twinkle 4s ease-in-out infinite alternate;
+  }
+
+  @keyframes twinkle {
+    0% { opacity: 0.6; }
+    100% { opacity: 1; }
+  }
+
+  /* Sun glow */
+  .sun {
+    position: absolute;
+    width: 140px; height: 140px;
+    background: radial-gradient(circle, #FFE566 0%, #FFAA44 40%, transparent 70%);
+    border-radius: 50%;
+    top: 12%;
+    right: 18%;
+    animation: sun-pulse 5s ease-in-out infinite;
+    filter: blur(2px);
+  }
+  .sun-halo {
+    position: absolute;
+    width: 220px; height: 220px;
+    background: radial-gradient(circle, rgba(255,180,60,0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    top: calc(12% - 40px);
+    right: calc(18% - 40px);
+    animation: sun-pulse 5s ease-in-out infinite;
+  }
+  @keyframes sun-pulse {
+    0%, 100% { transform: scale(1); opacity: 0.9; }
+    50% { transform: scale(1.06); opacity: 1; }
+  }
+
+  /* Ocean waves */
+  .ocean-container {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 38%;
+    overflow: hidden;
+  }
+
+  .wave {
+    position: absolute;
+    width: 220%;
+    left: -60%;
+    border-radius: 50%;
+  }
+  .wave1 {
+    height: 100px;
+    bottom: 60%;
+    background: rgba(26, 95, 122, 0.6);
+    animation: wave-move 8s ease-in-out infinite;
+  }
+  .wave2 {
+    height: 110px;
+    bottom: 50%;
+    background: rgba(30, 110, 140, 0.7);
+    animation: wave-move 10s ease-in-out infinite reverse;
+  }
+  .wave3 {
+    height: 120px;
+    bottom: 38%;
+    background: rgba(40, 130, 160, 0.8);
+    animation: wave-move 12s ease-in-out infinite;
+  }
+  .wave-base {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 42%;
+    background: linear-gradient(180deg, #1A6B85 0%, #0D3D52 100%);
+  }
+  .foam-line {
+    position: absolute;
+    bottom: 42%;
+    width: 100%;
+    height: 3px;
+    background: rgba(232,244,248,0.4);
+    animation: foam-shimmer 3s ease-in-out infinite;
+  }
+
+  @keyframes wave-move {
+    0%, 100% { transform: translateX(0) scaleY(1); }
+    50% { transform: translateX(5%) scaleY(1.05); }
+  }
+  @keyframes foam-shimmer {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.8; }
+  }
+
+  /* Beach silhouette */
+  .beach-silhouette {
+    position: absolute;
+    bottom: 38%;
+    width: 100%;
+    height: 60px;
+    background: linear-gradient(180deg, transparent 0%, rgba(245,200,120,0.15) 100%);
+  }
+
+  /* Palm trees */
+  .palm {
+    position: absolute;
+    bottom: 36%;
+  }
+  .palm-left { left: 3%; }
+  .palm-right { right: 5%; transform: scaleX(-1); }
+  .palm svg { width: 80px; height: 130px; opacity: 0.85; }
+
+  /* Cover content */
+  .cover-content {
+    position: relative;
+    z-index: 10;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0;
+    margin-bottom: 8vh;
+  }
+
+  .cover-eyebrow {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,220,160,0.8);
+    margin-bottom: 16px;
+    opacity: 0;
+    animation: fade-up 1s 0.3s forwards;
+  }
+
+  .cover-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(72px, 18vw, 110px);
+    font-weight: 300;
+    color: #fff;
+    line-height: 0.9;
+    letter-spacing: -2px;
+    opacity: 0;
+    animation: fade-up 1s 0.6s forwards;
+    text-shadow: 0 4px 40px rgba(0,0,0,0.3);
+  }
+
+  .cover-title span {
+    color: var(--coral);
+    font-style: italic;
+  }
+
+  .cover-date {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 12px;
+    font-weight: 400;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.65);
+    margin-top: 20px;
+    opacity: 0;
+    animation: fade-up 1s 0.9s forwards;
+  }
+
+  .cover-divider {
+    width: 60px;
+    height: 1px;
+    background: var(--coral);
+    margin: 20px auto;
+    opacity: 0;
+    animation: fade-in 1s 1.1s forwards;
+  }
+
+  .cover-cta {
+    display: inline-block;
+    margin-top: 8px;
+    padding: 14px 36px;
+    border: 1px solid rgba(255,255,255,0.35);
+    color: #fff;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    text-decoration: none;
+    cursor: pointer;
+    background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(4px);
+    transition: all 0.3s;
+    opacity: 0;
+    animation: fade-up 1s 1.4s forwards;
+  }
+  .cover-cta:hover {
+    background: var(--coral);
+    border-color: var(--coral);
+    transform: translateY(-2px);
+  }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    opacity: 0;
+    animation: fade-in 1s 2s forwards;
+  }
+  .scroll-hint span {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.4);
+    text-transform: uppercase;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(255,255,255,0.4), transparent);
+    animation: scroll-drop 2s ease-in-out infinite;
+  }
+  @keyframes scroll-drop {
+    0% { transform: scaleY(0); transform-origin: top; }
+    50% { transform: scaleY(1); transform-origin: top; }
+    51% { transform: scaleY(1); transform-origin: bottom; }
+    100% { transform: scaleY(0); transform-origin: bottom; }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(24px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+
+  /* ── DETAILS SECTION ── */
+  #details {
+    background: var(--sand);
+    padding: 80px 24px;
+    position: relative;
+    overflow: hidden;
+  }
+
+  #details::before {
+    content: '';
+    position: absolute;
+    top: -2px; left: 0; right: 0;
+    height: 60px;
+    background: linear-gradient(180deg, var(--ocean-deep) 0%, transparent 100%);
+    z-index: 2;
+  }
+
+  .texture-overlay {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c9a84c' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    pointer-events: none;
+  }
+
+  .details-inner {
+    max-width: 560px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .section-label {
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 8px;
+  }
+
+  .section-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 42px;
+    font-weight: 300;
+    color: var(--ocean-deep);
+    line-height: 1.1;
+    margin-bottom: 32px;
+  }
+
+  .detail-cards {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+
+  .detail-card {
+    background: rgba(255,255,255,0.7);
+    border: 1px solid rgba(201,168,76,0.2);
+    border-radius: 2px;
+    padding: 24px 20px;
+    backdrop-filter: blur(4px);
+    transition: transform 0.3s, box-shadow 0.3s;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s, transform 0.6s, box-shadow 0.3s;
+  }
+  .detail-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .detail-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.08);
+  }
+  .detail-card-icon {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  .detail-card-label {
+    font-size: 8px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .detail-card-value {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 400;
+    color: var(--ocean-deep);
+    line-height: 1.2;
+  }
+  .detail-card-sub {
+    font-size: 10px;
+    color: var(--text-mid);
+    margin-top: 4px;
+    letter-spacing: 0.5px;
+  }
+
+  /* Menu card */
+  .menu-card {
+    background: var(--ocean-deep);
+    border-radius: 2px;
+    padding: 32px;
+    color: #fff;
+    margin-bottom: 32px;
+    position: relative;
+    overflow: hidden;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s 0.3s, transform 0.6s 0.3s;
+  }
+  .menu-card.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .menu-card::before {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 120px; height: 120px;
+    background: radial-gradient(circle, rgba(232,132,90,0.2) 0%, transparent 70%);
+  }
+  .menu-card-title {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--coral);
+    margin-bottom: 20px;
+  }
+  .menu-items {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .menu-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .menu-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+  }
+  .menu-item-emoji {
+    font-size: 28px;
+    flex-shrink: 0;
+  }
+  .menu-item-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 24px;
+    font-weight: 300;
+    color: #fff;
+  }
+  .menu-item-desc {
+    font-size: 10px;
+    color: rgba(255,255,255,0.45);
+    margin-top: 2px;
+    letter-spacing: 0.3px;
+  }
+
+  /* Map section */
+  .map-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s 0.4s, transform 0.6s 0.4s;
+  }
+  .map-section.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .map-label {
+    font-size: 9px;
+    letter-spacing: 4px;
+    text-transform: uppercase;
+    color: var(--text-mid);
+    margin-bottom: 12px;
+  }
+  .map-embed {
+    width: 100%;
+    height: 220px;
+    border-radius: 2px;
+    overflow: hidden;
+    border: 1px solid rgba(201,168,76,0.2);
+    position: relative;
+  }
+  .map-embed iframe {
+    width: 100%;
+    height: 100%;
+    border: none;
+  }
+  .map-overlay-btn {
+    position: absolute;
+    bottom: 12px;
+    right: 12px;
+    background: var(--ocean-deep);
+    color: #fff;
+    border: none;
+    padding: 10px 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    display: block;
+    transition: background 0.2s;
+  }
+  .map-overlay-btn:hover { background: var(--coral); }
+
+  /* ── VIBE SECTION ── */
+  #vibe {
+    background: linear-gradient(180deg, #0D2535 0%, #1A3A4A 100%);
+    padding: 80px 24px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .vibe-bg-text {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(100px, 25vw, 180px);
+    font-weight: 300;
+    color: rgba(255,255,255,0.025);
+    white-space: nowrap;
+    pointer-events: none;
+    letter-spacing: -4px;
+  }
+
+  .vibe-inner {
+    max-width: 480px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 1;
+  }
+
+  .vibe-quote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(28px, 7vw, 46px);
+    font-weight: 300;
+    font-style: italic;
+    color: #fff;
+    line-height: 1.3;
+    margin-bottom: 24px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s, transform 0.8s;
+  }
+  .vibe-quote.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .vibe-quote em {
+    color: var(--coral);
+    font-style: normal;
+  }
+
+  .vibe-sub {
+    font-size: 11px;
+    font-weight: 300;
+    letter-spacing: 2px;
+    color: rgba(255,255,255,0.4);
+    opacity: 0;
+    transition: opacity 0.8s 0.3s;
+  }
+  .vibe-sub.visible { opacity: 1; }
+
+  /* Vibes grid */
+  .vibes-grid {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    flex-wrap: wrap;
+    margin-top: 40px;
+    opacity: 0;
+    transition: opacity 0.8s 0.5s;
+  }
+  .vibes-grid.visible { opacity: 1; }
+  .vibe-pill {
+    padding: 8px 18px;
+    border: 1px solid rgba(255,255,255,0.1);
+    border-radius: 100px;
+    font-size: 10px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(4px);
+  }
+
+  /* ── RSVP SECTION ── */
+  #rsvp {
+    background: var(--sand);
+    padding: 80px 24px 60px;
+    text-align: center;
+    position: relative;
+  }
+
+  .rsvp-inner {
+    max-width: 420px;
+    margin: 0 auto;
+  }
+
+  .rsvp-heading {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 52px;
+    font-weight: 300;
+    color: var(--ocean-deep);
+    line-height: 1;
+    margin-bottom: 12px;
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s, transform 0.6s;
+  }
+  .rsvp-heading.visible { opacity: 1; transform: translateY(0); }
+
+  .rsvp-sub {
+    font-size: 11px;
+    letter-spacing: 2px;
+    color: var(--text-mid);
+    margin-bottom: 40px;
+    opacity: 0;
+    transition: opacity 0.6s 0.2s;
+  }
+  .rsvp-sub.visible { opacity: 1; }
+
+  .rsvp-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: center;
+    flex-wrap: wrap;
+    opacity: 0;
+    transition: opacity 0.6s 0.4s;
+  }
+  .rsvp-buttons.visible { opacity: 1; }
+
+  .btn-primary {
+    padding: 16px 40px;
+    background: var(--ocean-deep);
+    color: #fff;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
+    border-radius: 1px;
+  }
+  .btn-primary:hover {
+    background: var(--coral);
+    transform: translateY(-2px);
+  }
+
+  .btn-secondary {
+    padding: 16px 40px;
+    background: transparent;
+    color: var(--ocean-deep);
+    border: 1px solid var(--ocean-deep);
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: all 0.3s;
+    border-radius: 1px;
+  }
+  .btn-secondary:hover {
+    background: var(--ocean-deep);
+    color: #fff;
+  }
+
+  /* Response modal */
+  .modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,0.7);
+    backdrop-filter: blur(6px);
+    z-index: 1000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s;
+  }
+  .modal-overlay.active {
+    opacity: 1;
+    pointer-events: all;
+  }
+  .modal-box {
+    background: var(--sand);
+    padding: 48px 40px;
+    max-width: 360px;
+    width: 90%;
+    text-align: center;
+    transform: translateY(20px);
+    transition: transform 0.3s;
+    border-radius: 2px;
+  }
+  .modal-overlay.active .modal-box {
+    transform: translateY(0);
+  }
+  .modal-emoji { font-size: 48px; margin-bottom: 16px; }
+  .modal-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    color: var(--ocean-deep);
+    margin-bottom: 12px;
+  }
+  .modal-text {
+    font-size: 13px;
+    color: var(--text-mid);
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .modal-close {
+    padding: 12px 28px;
+    background: var(--ocean-deep);
+    color: #fff;
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    cursor: pointer;
+    border-radius: 1px;
+  }
+
+  /* Footer */
+  footer {
+    background: var(--ocean-deep);
+    padding: 24px;
+    text-align: center;
+  }
+  footer p {
+    font-size: 9px;
+    letter-spacing: 3px;
+    color: rgba(255,255,255,0.2);
+    text-transform: uppercase;
+  }
+
+  /* Mobile adjustments */
+  @media (max-width: 480px) {
+    .detail-cards { grid-template-columns: 1fr; }
+    .cover-title { letter-spacing: -1px; }
+    body { cursor: auto; }
+    .cursor, .cursor-ring { display: none; }
+  }
+
+  /* ── ENVELOPE SCREEN ── */
+  #envelope-screen {
+    position: fixed;
+    inset: 0;
+    z-index: 2000;
+    background: linear-gradient(145deg, #0D2535 0%, #1A4A5A 60%, #0D3D52 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.8s ease, visibility 0.8s ease;
+    overflow: hidden;
+  }
+  #envelope-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+
+  /* Floating particles */
+  .particle {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: float-particle linear infinite;
+    opacity: 0.15;
+  }
+  @keyframes float-particle {
+    0% { transform: translateY(100vh) rotate(0deg); opacity: 0; }
+    10% { opacity: 0.15; }
+    90% { opacity: 0.15; }
+    100% { transform: translateY(-100px) rotate(360deg); opacity: 0; }
+  }
+
+  /* The envelope */
+  .envelope-wrap {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 36px;
+  }
+
+  .envelope-top-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 14px;
+    font-weight: 300;
+    font-style: italic;
+    letter-spacing: 4px;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+    animation: fade-in 1.5s 0.5s both;
+  }
+
+  .envelope {
+    position: relative;
+    width: min(320px, 80vw);
+    height: min(220px, 55vw);
+    cursor: pointer;
+    filter: drop-shadow(0 24px 60px rgba(0,0,0,0.5));
+    animation: envelope-float 4s ease-in-out infinite, fade-up-env 1s 0.3s both;
+  }
+  @keyframes envelope-float {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+  }
+  @keyframes fade-up-env {
+    from { opacity: 0; transform: translateY(30px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  /* Envelope body */
+  .env-body {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(160deg, #F5E6C8 0%, #EDD8A8 100%);
+    border-radius: 4px 4px 8px 8px;
+    overflow: hidden;
+  }
+  .env-body::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 55%;
+    background: linear-gradient(180deg, #E8D4A8 0%, #DCC898 100%);
+  }
+  /* Left and right triangles */
+  .env-left, .env-right {
+    position: absolute;
+    bottom: 0;
+    width: 0;
+    height: 0;
+    z-index: 2;
+  }
+  .env-left {
+    left: 0;
+    border-bottom: min(110px, 27.5vw) solid #D4BC88;
+    border-right: min(160px, 40vw) solid transparent;
+  }
+  .env-right {
+    right: 0;
+    border-bottom: min(110px, 27.5vw) solid #D4BC88;
+    border-left: min(160px, 40vw) solid transparent;
+  }
+
+  /* Envelope flap (top triangle) */
+  .env-flap {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    width: 0;
+    height: 0;
+    border-top: min(118px, 29.5vw) solid #C9A84C;
+    border-left: min(160px, 40vw) solid transparent;
+    border-right: min(160px, 40vw) solid transparent;
+    transform-origin: top center;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 5;
+    filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+  }
+  .envelope.opening .env-flap {
+    transform: rotateX(180deg);
+  }
+
+  /* Wax seal */
+  .wax-seal {
+    position: absolute;
+    top: calc(min(118px, 29.5vw) - 26px);
+    left: 50%;
+    transform: translateX(-50%);
+    width: 52px; height: 52px;
+    background: radial-gradient(circle, #E8845A 0%, #C06040 60%, #A04828 100%);
+    border-radius: 50%;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.3), inset 0 1px 2px rgba(255,255,255,0.2);
+    transition: transform 0.3s, opacity 0.4s;
+    animation: seal-pulse 2.5s ease-in-out infinite;
+  }
+  .envelope.opening .wax-seal {
+    transform: translateX(-50%) scale(0);
+    opacity: 0;
+  }
+  @keyframes seal-pulse {
+    0%, 100% { box-shadow: 0 4px 16px rgba(232,132,90,0.4), inset 0 1px 2px rgba(255,255,255,0.2); }
+    50% { box-shadow: 0 4px 32px rgba(232,132,90,0.7), inset 0 1px 2px rgba(255,255,255,0.2); }
+  }
+
+  /* Letter peeking out */
+  .env-letter {
+    position: absolute;
+    bottom: 10%;
+    left: 8%;
+    right: 8%;
+    height: 85%;
+    background: linear-gradient(180deg, #FFFDF5 0%, #F8F0DC 100%);
+    border-radius: 3px;
+    z-index: 3;
+    transform: translateY(0);
+    transition: transform 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 -4px 20px rgba(0,0,0,0.12);
+  }
+  .envelope.opening .env-letter {
+    transform: translateY(-90%);
+  }
+  .letter-preview-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    font-style: italic;
+    color: rgba(13,61,82,0.5);
+    letter-spacing: 1px;
+    text-align: center;
+    padding: 8px;
+    line-height: 1.5;
+    transition: opacity 0.3s;
+  }
+  .envelope.opening .letter-preview-text {
+    opacity: 0;
+  }
+
+  /* Address lines on envelope */
+  .env-address {
+    position: absolute;
+    bottom: 12%;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 4;
+    text-align: center;
+  }
+  .env-address-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 16px;
+    font-style: italic;
+    color: rgba(13,61,82,0.6);
+    letter-spacing: 2px;
+  }
+
+  /* CTA below envelope */
+  .envelope-cta {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    animation: fade-up-env 1s 1.2s both;
+  }
+  .envelope-cta-text {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px;
+    font-weight: 600;
+    letter-spacing: 5px;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.5);
+  }
+  .tap-hint {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 22px;
+    animation: bounce-tap 1.5s ease-in-out infinite;
+  }
+  @keyframes bounce-tap {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-6px); }
+  }
+
+  /* Stars on envelope screen */
+  .env-stars {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .env-star {
+    position: absolute;
+    background: white;
+    border-radius: 50%;
+    animation: star-twinkle ease-in-out infinite alternate;
+  }
+  @keyframes star-twinkle {
+    from { opacity: 0.1; transform: scale(0.8); }
+    to { opacity: 0.6; transform: scale(1.2); }
+  }
+
+  /* Transition ripple */
+  .ripple-overlay {
+    position: fixed;
+    inset: 0;
+    z-index: 1999;
+    pointer-events: none;
+    background: radial-gradient(circle at center, #1A5F7A 0%, #0D2535 100%);
+    transform: scale(0);
+    border-radius: 50%;
+    transition: transform 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    opacity: 0;
+  }
+  .ripple-overlay.expand {
+    transform: scale(4);
+    opacity: 1;
+  }
+</style>
+</head>
+<body>
+
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ENVELOPE SCREEN -->
+<div id="envelope-screen">
+  <div class="env-stars" id="envStars"></div>
+
+  <div class="envelope-wrap">
+    <p class="envelope-top-text">Tienes un mensaje</p>
+
+    <div class="envelope" id="envelope" onclick="openEnvelope()">
+      <div class="env-body">
+        <div class="env-left"></div>
+        <div class="env-right"></div>
+      </div>
+      <div class="env-letter">
+        <div class="letter-preview-text">Una invitación<br/>especial para ti ✨</div>
+      </div>
+      <div class="env-flap"></div>
+      <div class="wax-seal">🌊</div>
+    </div>
+
+    <div class="envelope-cta">
+      <p class="envelope-cta-text">Toca para abrir</p>
+      <div class="tap-hint">👆</div>
+    </div>
+  </div>
+</div>
+
+<div class="ripple-overlay" id="ripple"></div>
+
+<!-- COVER -->
+<section id="cover">
+  <div class="stars"></div>
+  <div class="sun-halo"></div>
+  <div class="sun"></div>
+
+  <div class="cover-content">
+    <p class="cover-eyebrow">Una invitación especial para ti</p>
+    <h1 class="cover-title">Bell<span>a</span>vista</h1>
+    <p class="cover-date">Sábado · 21 de Marzo · 2026</p>
+    <div class="cover-divider"></div>
+    <a href="#details" class="cover-cta">Ver los detalles</a>
+  </div>
+
+  <div class="ocean-container">
+    <div class="wave wave1"></div>
+    <div class="wave wave2"></div>
+    <div class="wave wave3"></div>
+    <div class="wave-base"></div>
+    <div class="foam-line"></div>
+  </div>
+
+  <!-- Palm trees -->
+  <div class="palm palm-left">
+    <svg viewBox="0 0 80 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M38 130 Q36 80 30 60" stroke="#1A3A20" stroke-width="4" stroke-linecap="round"/>
+      <path d="M30 62 Q10 50 0 35 Q15 45 30 62" fill="#1A4A20" opacity="0.8"/>
+      <path d="M30 60 Q18 40 22 20 Q26 45 30 60" fill="#1A4A20" opacity="0.9"/>
+      <path d="M30 58 Q40 35 55 28 Q42 45 30 58" fill="#1A4A20" opacity="0.8"/>
+      <path d="M30 62 Q50 55 65 50 Q48 58 30 62" fill="#1A4A20" opacity="0.7"/>
+      <path d="M30 64 Q12 70 5 75 Q16 66 30 64" fill="#1A4A20" opacity="0.7"/>
+    </svg>
+  </div>
+  <div class="palm palm-right">
+    <svg viewBox="0 0 80 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M38 130 Q40 78 44 58" stroke="#1A3A20" stroke-width="4" stroke-linecap="round"/>
+      <path d="M44 60 Q62 48 72 32 Q58 44 44 60" fill="#1A4A20" opacity="0.8"/>
+      <path d="M44 58 Q52 36 48 16 Q44 43 44 58" fill="#1A4A20" opacity="0.9"/>
+      <path d="M44 56 Q32 34 18 26 Q36 44 44 56" fill="#1A4A20" opacity="0.8"/>
+      <path d="M44 60 Q24 54 10 48 Q28 58 44 60" fill="#1A4A20" opacity="0.7"/>
+      <path d="M44 62 Q60 68 68 74 Q56 64 44 62" fill="#1A4A20" opacity="0.7"/>
+    </svg>
+  </div>
+
+  <div class="scroll-hint">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- DETAILS -->
+<section id="details">
+  <div class="texture-overlay"></div>
+  <div class="details-inner">
+    <p class="section-label">Los detalles</p>
+    <h2 class="section-heading">Todo listo<br/>para ese día</h2>
+
+    <div class="detail-cards">
+      <div class="detail-card">
+        <div class="detail-card-icon">📅</div>
+        <div class="detail-card-label">Fecha</div>
+        <div class="detail-card-value">Sábado<br/>21 Marzo</div>
+        <div class="detail-card-sub">2026</div>
+      </div>
+      <div class="detail-card">
+        <div class="detail-card-icon">⏰</div>
+        <div class="detail-card-label">Hora</div>
+        <div class="detail-card-value">11:00 AM</div>
+        <div class="detail-card-sub">Llega cuando quieras</div>
+      </div>
+      <div class="detail-card">
+        <div class="detail-card-icon">📍</div>
+        <div class="detail-card-label">Lugar</div>
+        <div class="detail-card-value">Bellavista<br/>Beach</div>
+        <div class="detail-card-sub">Playa del Pacífico</div>
+      </div>
+      <div class="detail-card">
+        <div class="detail-card-icon">🌊</div>
+        <div class="detail-card-label">Ambiente</div>
+        <div class="detail-card-value">Sol, arena<br/>y buena vibra</div>
+        <div class="detail-card-sub">Y la mejor compañía</div>
+      </div>
+    </div>
+
+    <div class="menu-card">
+      <p class="menu-card-title">El menú del día</p>
+      <div class="menu-items">
+        <div class="menu-item">
+          <div class="menu-item-emoji">🦐</div>
+          <div>
+            <div class="menu-item-name">Ceviche Mixto</div>
+            <div class="menu-item-desc">Fresco, bien picante, con mucho limón</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-emoji">🍺</div>
+          <div>
+            <div class="menu-item-name">Corona bien fría</div>
+            <div class="menu-item-desc">Con su rodajita de limón, como tiene que ser</div>
+          </div>
+        </div>
+        <div class="menu-item">
+          <div class="menu-item-emoji">🌅</div>
+          <div>
+            <div class="menu-item-name">Atardecer</div>
+            <div class="menu-item-desc">Este corre por mi cuenta</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="map-section">
+      <p class="map-label">Cómo llegar · Bellavista</p>
+      <div class="map-embed">
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3989.7!2d-80.0!3d-0.5!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zBellavista!5e0!3m2!1ses!2sec!4v1"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          title="Bellavista Beach Map">
+        </iframe>
+        <a href="https://maps.app.goo.gl/3UpjneD3CcSk1uaX7" target="_blank" class="map-overlay-btn">Abrir en Maps</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- VIBE -->
+<section id="vibe">
+  <div class="vibe-bg-text">Bellavista</div>
+  <div class="vibe-inner">
+    <p class="vibe-quote">"No hay mejor plan que uno<br/>con <em>buena compañía</em><br/>frente al mar."</p>
+    <p class="vibe-sub">El resto lo inventa el día</p>
+    <div class="vibes-grid">
+      <span class="vibe-pill">🌊 Mar</span>
+      <span class="vibe-pill">☀️ Sol</span>
+      <span class="vibe-pill">🦐 Ceviche</span>
+      <span class="vibe-pill">🍺 Corona</span>
+      <span class="vibe-pill">🏖️ Arena</span>
+      <span class="vibe-pill">💬 Conversación</span>
+    </div>
+  </div>
+</section>
+
+<!-- RSVP -->
+<section id="rsvp">
+  <div class="rsvp-inner">
+    <p class="section-label" style="text-align:center;">Tu respuesta</p>
+    <h2 class="rsvp-heading">¿Vamos?</h2>
+    <p class="rsvp-sub">Sábado 21 de Marzo · 11:00 AM · Bellavista</p>
+    <div class="rsvp-buttons">
+      <button class="btn-primary" onclick="showModal('yes')">Ahí estaré 🌊</button>
+      <button class="btn-secondary" onclick="showModal('no')">Quizás después</button>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <p>Bellavista · Sábado 21 Marzo 2026 · Hecho con buena vibra</p>
+</footer>
+
+<!-- Modal -->
+<div class="modal-overlay" id="modal">
+  <div class="modal-box">
+    <div class="modal-emoji" id="modal-emoji">🌊</div>
+    <h3 class="modal-title" id="modal-title">¡Perfecto!</h3>
+    <p class="modal-text" id="modal-text">Nos vemos el sábado. El ceviche y la corona ya están esperando.</p>
+    <button class="modal-close" onclick="closeModal()">Cerrar</button>
+  </div>
+</div>
+
+<script>
+  // ── ENVELOPE STARS ──
+  const envStars = document.getElementById('envStars');
+  for (let i = 0; i < 60; i++) {
+    const s = document.createElement('div');
+    const size = Math.random() * 2.5 + 0.5;
+    s.className = 'env-star';
+    s.style.cssText = `
+      width:${size}px; height:${size}px;
+      top:${Math.random()*100}%;
+      left:${Math.random()*100}%;
+      animation-duration:${Math.random()*3+2}s;
+      animation-delay:${Math.random()*3}s;
+    `;
+    envStars.appendChild(s);
+  }
+
+  // ── ENVELOPE OPEN ──
+  function openEnvelope() {
+    const env = document.getElementById('envelope');
+    if (env.classList.contains('opening')) return;
+    env.classList.add('opening');
+
+    // After letter flies up, do ripple transition
+    setTimeout(() => {
+      const ripple = document.getElementById('ripple');
+      ripple.classList.add('expand');
+      setTimeout(() => {
+        document.getElementById('envelope-screen').classList.add('hidden');
+        ripple.style.transition = 'none';
+        ripple.classList.remove('expand');
+        setTimeout(() => { ripple.style.transition = ''; }, 50);
+      }, 600);
+    }, 900);
+  }
+
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx + 'px'; cursor.style.top = my + 'px'; });
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) *.12;
+    ring.style.left = rx + 'px';
+    ring.style.top = ry + 'px';
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+  document.querySelectorAll('a, button, .cover-cta').forEach(el => {
+    el.addEventListener('mouseenter', () => { ring.style.width = '56px'; ring.style.height = '56px'; cursor.style.transform = 'translate(-50%,-50%) scale(2)'; });
+    el.addEventListener('mouseleave', () => { ring.style.width = '36px'; ring.style.height = '36px'; cursor.style.transform = 'translate(-50%,-50%) scale(1)'; });
+  });
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('.detail-card, .menu-card, .map-section, .vibe-quote, .vibe-sub, .vibes-grid, .rsvp-heading, .rsvp-sub, .rsvp-buttons').forEach((el, i) => {
+    if (el.classList.contains('detail-card')) el.style.transitionDelay = (i * 0.08) + 's';
+    observer.observe(el);
+  });
+
+  // Smooth scroll
+  document.querySelector('.cover-cta').addEventListener('click', e => {
+    e.preventDefault();
+    document.getElementById('details').scrollIntoView({ behavior: 'smooth' });
+  });
+
+  // RSVP Modal
+  function showModal(type) {
+    const modal = document.getElementById('modal');
+    const emoji = document.getElementById('modal-emoji');
+    const title = document.getElementById('modal-title');
+    const text = document.getElementById('modal-text');
+    if (type === 'yes') {
+      emoji.textContent = '🌊';
+      title.textContent = '¡Qué buena decisión!';
+      text.textContent = 'Nos vemos el sábado 21 a las 11 AM. El ceviche, la corona y la mejor vista te esperan.';
+    } else {
+      emoji.textContent = '😏';
+      title.textContent = 'Ya sé que vas a venir...';
+      text.textContent = 'El plan sigue en pie. Cuando estés lista, Bellavista te espera.';
+    }
+    modal.classList.add('active');
+  }
+  function closeModal() {
+    document.getElementById('modal').classList.remove('active');
+  }
+  document.getElementById('modal').addEventListener('click', e => {
+    if (e.target === document.getElementById('modal')) closeModal();
+  });
+
+  // Parallax subtle
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    document.querySelector('.sun').style.transform = `translateY(${y * 0.08}px)`;
+    document.querySelector('.sun-halo').style.transform = `translateY(${y * 0.06}px)`;
+  });
+</script>
+</body>
+</html>
